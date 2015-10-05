@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.coremedia.ui:hamcrest-matcher:7.5-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/coremedia/ui/hamcrest-matcher/7.5-SNAPSHOT/hamcrest-matcher-7.5-20151002.114554-2679.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/coremedia/ui/hamcrest-matcher/7.5-SNAPSHOT/hamcrest-matcher-7.5-20151002.114554-2679-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/coremedia/ui/hamcrest-matcher/7.5-SNAPSHOT/hamcrest-matcher-7.5-20151002.114554-2679-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
