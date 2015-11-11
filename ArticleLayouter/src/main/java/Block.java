@@ -5,7 +5,7 @@ public class Block {
     private int height;
     private int width;
 
-    public Block(int height, int width) {
+    public Block(int width, int height) {
         this.height = height;
         this.width = width;
     }

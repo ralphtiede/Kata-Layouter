@@ -3,24 +3,20 @@
  */
 public class PageElement {
     private Block block;
-    private int x;
-    private int y;
+    private PagePosition position;
 
-    public PageElement(Block block, int x, int y) {
+    public PageElement(Block block, int positionX, int positionY) {
         this.block = block;
-        this.x = x;
-        this.y = y;
+        this.position = new PagePosition(positionX,positionY);
+
     }
 
     public Block getBlock() {
         return block;
     }
 
-    public int getX() {
-        return x;
+    public PagePosition getPosition() {
+        return position;
     }
 
-    public int getY() {
-        return y;
-    }
 }

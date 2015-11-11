@@ -50,8 +50,8 @@ public class LayoutTest {
         PageElement element = elements.get(0);
         Assert.assertNotNull(element);
         Assert.assertEquals(block, element.getBlock());
-        Assert.assertEquals(0, element.getX());
-        Assert.assertEquals(0, element.getY());
+        Assert.assertEquals(0, element.getPosition().getLeft());
+        Assert.assertEquals(0, element.getPosition().getTop());
     }
 
     @Test
@@ -94,13 +94,13 @@ public class LayoutTest {
 
     private Matcher<Object> matchElement(int expectedX, int expectedY) {
         return allOf(
-                hasProperty("x", equalTo(expectedX)),
-                hasProperty("y", equalTo(expectedY))
+
+                hasProperty("position", equalTo(new PagePosition(expectedX,expectedY)))
         );
     }
 
     private Block block(int height, int width) {
-        return new Block(height, width);
+        return new Block(width, height);
     }
 
     private List<Page> layout(Block ... blocks) {
