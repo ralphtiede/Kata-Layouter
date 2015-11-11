@@ -6,8 +6,7 @@ import java.util.List;
  */
 public class Layouter {
 
-    private int y;
-    private int x;
+    private PagePosition currentPositionOnPage;
     private int columnStartY;
     private int columnHeight;
 
@@ -26,8 +25,8 @@ public class Layouter {
         List<Block> remainingBlocks = blocks.subList(pos, blocks.size());
         int totalHeight = calculateTotalHeight(remainingBlocks);
         columnHeight = totalHeight - totalHeight/2;
-        x = 0;
-        y = 0;
+        currentPositionOnPage = new PagePosition(0,0);
+
         for (Block block : remainingBlocks) {
             handleBlockInColumn(page, block);
         }
@@ -36,21 +35,25 @@ public class Layouter {
     }
 
     private void handleBlockInColumn(Page page, Block block) {
-        int remainingHeight = columnHeight - y;
-        if (block.getHeight() <= remainingHeight){
-            page.getElements().add(new PageElement(block, x, y + columnStartY));
-            y += block.getHeight();
-            if (y == columnHeight){
-                x++;
-                y = 0;
-            }
-        } else {
-            page.getElements().add(new PageElement(block, x, y + columnStartY));
-            x++;
-            y = 0;
-            page.getElements().add(new PageElement(block, x, y + columnStartY));
-            y = block.getHeight() - remainingHeight;
+        int remainingBlockHeight = AddBlockToPage(page,block,0);
+        if (remainingBlockHeight > 0) {
+            AddBlockToPage(page,block, block.getHeight()-remainingBlockHeight);
         }
+    }
+
+    private int AddBlockToPage(Page page, Block block, int verticalOffset) {
+        int remainingHeight = columnHeight - currentPositionOnPage.getTop();
+        int heightOfBlockToAdd = block.getHeight()-verticalOffset;
+        if (heightOfBlockToAdd > remainingHeight)
+            heightOfBlockToAdd = remainingHeight;
+
+       page.getElements().add(new PageElement(block, currentPositionOnPage.getLeft(), currentPositionOnPage.getTop() + columnStartY));
+        currentPositionOnPage.moveDown(heightOfBlockToAdd);
+        if (currentPositionOnPage.getTop() >= columnHeight){
+            currentPositionOnPage.toNextColumn(0);
+        }
+
+        return block.getHeight()-verticalOffset-heightOfBlockToAdd;
     }
 
     private int calculateTotalHeight(List<Block> blocks) {

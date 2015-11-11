@@ -49,4 +49,13 @@ public class PagePosition {
         result = 31 * result + top;
         return result;
     }
+
+    public void moveDown(int distance) {
+        top += distance;
+    }
+
+    public void toNextColumn(int newTop) {
+        left++;
+        top = newTop;
+    }
 }
